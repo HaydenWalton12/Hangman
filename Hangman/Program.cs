@@ -30,7 +30,7 @@ namespace Hangman
             Random rand = new Random();
             var ID = rand.Next(0, 2);
              m_Word = m_Words[ID];
-            m_CorrectLetters = m_Word.ToList();
+            
 
         }
 
@@ -39,21 +39,27 @@ namespace Hangman
             ShowHangman();
             char userInput;
             Console.Write("Please enter your guess: ");
-            userInput = Console.ReadLine()[0];
+            userInput = Console.ReadKey().KeyChar;
+
+
+            if (m_Word.Contains(userInput))
+            {
+                Console.WriteLine(userInput.ToString(), ": was a correct letter.");
             
-            //Checks to see if the user had a correct letter
-            if(m_CorrectLetters.Contains()
-            {
-                Console.WriteLine(userInput.ToString(), ": was a correct answer");
-
-
             }
-            //Check to see if the user has used a value 
-            while (m_IncorrectLetters.Contains((userInput = Char.ToLower(Console.ReadKey().KeyChar))))
+            else
             {
-                Console.WriteLine(userInput.ToString() , ": has already been guessed");
+                //Check to see if the user has used a value 
+                while (m_IncorrectLetters.Contains((userInput = Char.ToLower(Console.ReadKey().KeyChar))))
+
+                {
+                    Console.WriteLine(userInput.ToString(), ": has already been guessed");
+                    m_Lives--;
+                }
             }
 
+
+           
             //Clear the screen
             Console.Clear();
         }
